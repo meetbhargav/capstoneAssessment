@@ -10,15 +10,16 @@ import org.testng.Assert;
 public class CapstonePage {
 	
 	private WebDriver driver;
-	private String image1 = "http://webdriveruniversity.com/img/amp.svg";
-	private String image2 = "http://webdriveruniversity.com/img/boombox.svg";
-	private String image3 = "http://webdriveruniversity.com/img/nintendo.svg";
+	//private String image1 = "http://webdriveruniversity.com/img/amp.svg";
+	//private String image2 = "http://webdriveruniversity.com/img/boombox.svg";
+	//private String image3 = "http://webdriveruniversity.com/img/nintendo.svg";
 	
 	
 	//Locators
 	private By iFrameLinkLocator = By.id("iframe");
 	private By iFrameLocator = By.id("frame");
 	private By imagesLocator = By.xpath("//div[@class='carousel-inner']//img");
+	private By rightButtonLocator = By.xpath("//span[@class='glyphicon glyphicon-chevron-right']");
 	
 	
 	//Constructor
@@ -39,13 +40,32 @@ public class CapstonePage {
 	
 	public void compareImages() {
 		List<WebElement> images = driver.findElements(imagesLocator);
+		WebElement rightButton = driver.findElement(rightButtonLocator);
+		
+		
+		for(int i = 0; i<images.size(); i++) {
+			
+			WebElement currentImage = images.get(i);
+			//System.out.println(currentImage);
+			
+			 Assert.assertTrue(!currentImage.getAttribute("src").isEmpty(), "src attribute should not be empty for image " + (i + 1));
+			 System.out.println("Image"+ i +" : "+currentImage.getAttribute("src"));
+			 rightButton.click();
+			 
+				try {
+					Thread.sleep(500);
+				}
+				catch(InterruptedException e) {
+					e.printStackTrace();
+				}
+		}
 		
 		/*WebElement images1 = images.get(0);
 		String a = images1.getAttribute("src");
 		System.out.println(a);*/
 		
 		
-		for(WebElement element:images) {
+		/*for(WebElement element:images) {
 			String attributeValue = element.getAttribute("src");
 			
 			if(attributeValue.equals(image1)) {
@@ -60,6 +80,6 @@ public class CapstonePage {
 			}else {
 				System.out.println("No match found" + attributeValue);
 			}	
-		}
+		}*/
 	}
 }
