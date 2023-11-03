@@ -35,24 +35,32 @@ public class CapstonePage {
 	public void switchToFrame() {
 		WebElement iFrame = driver.findElement(iFrameLocator);
 		driver.switchTo().frame(iFrame);
-		System.out.println("Switched!");
 	}
 	
 	public void compareImages() {
 		List<WebElement> images = driver.findElements(imagesLocator);
 		
+		/*WebElement images1 = images.get(0);
+		String a = images1.getAttribute("src");
+		System.out.println(a);*/
+		
+		
 		for(WebElement element:images) {
 			String attributeValue = element.getAttribute("src");
-
+			
 			if(attributeValue.equals(image1)) {
-				Assert.assertTrue(attributeValue.equals(image1), "Image One Found !");
+				Assert.assertEquals(attributeValue, image1);
+				System.out.println("Image 1 : "+attributeValue);
 			}else if(attributeValue.equals(image2)) {
-				Assert.assertTrue(attributeValue.equals(image2), "Image Two Found !");
+				Assert.assertEquals(attributeValue, image2);
+				System.out.println("Image 2 : "+attributeValue);
 			}else if(attributeValue.equals(image3)) {
-				Assert.assertTrue(attributeValue.equals(image3), "Image Three Found !");
+				Assert.assertEquals(attributeValue, image3);
+				System.out.println("Image 3 : "+attributeValue);
 			}else {
 				System.out.println("No match found" + attributeValue);
 			}
+			
 		}
 	}
 }
