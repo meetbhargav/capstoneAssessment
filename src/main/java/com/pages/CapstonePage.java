@@ -59,8 +59,7 @@ public class CapstonePage {
 				System.out.println("Image 3 : "+attributeValue);
 			}else {
 				System.out.println("No match found" + attributeValue);
-			}
-			
+			}	
 		}
 	}
 }
